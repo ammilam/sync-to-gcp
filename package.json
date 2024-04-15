@@ -1,5 +1,5 @@
 {
-  "name": "sync-to-gcp",
+  "name": "file-sync-to-gcp",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {

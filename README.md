@@ -24,7 +24,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=./key/to/service/account.json
 
 ## Usage
 
-Download a binary from the [latest release](https://github.com/ammilam/sync-to-gcp/releases/tag/latest). Depending on the intended destination of the local file and/or its contents, refer to [Google Cloud Storage](#google-cloud-storage) or [Google Secret Manager](#google-secret-manager-secret).
+Download a binary from the [latest release](https://github.com/ammilam/file-sync-to-gcp/releases/tag/latest). Depending on the intended destination of the local file and/or its contents, refer to [Google Cloud Storage](#google-cloud-storage) or [Google Secret Manager](#google-secret-manager-secret).
 
 ### Google Cloud Storage
 
@@ -42,16 +42,16 @@ When syncing to Google Cloud Storage, the following flags are supported:
 ## --type=cloud-storage ##
 ##########################
 # copy to the root of the bucket
-./sync-to-gcp  --path=./path/to/local/dir --bucket=gcs-bucket-name
+./file-sync-to-gcp  --path=./path/to/local/dir --bucket=gcs-bucket-name
 
 # copy to a specific directory on a bucket
-./sync-to-gcp  --path=./path/to/local/dir --bucket=gcs-bucket-name --bucket_path=path/on/bucket
+./file-sync-to-gcp  --path=./path/to/local/dir --bucket=gcs-bucket-name --bucket_path=path/on/bucket
 
 # specifying multiple paths
-./sync-to-gcp --path=./path/to/local/file.txt --path=./path/to/another/file.txt --bucket=gcs-bucket-name --interval=900
+./file-sync-to-gcp --path=./path/to/local/file.txt --path=./path/to/another/file.txt --bucket=gcs-bucket-name --interval=900
 
 # moving a file
-./sync-to-gcp --path=./path/to/local/file.txt --bucket=gcs-bucket-name --interval=900 --method=move
+./file-sync-to-gcp --path=./path/to/local/file.txt --bucket=gcs-bucket-name --interval=900 --method=move
 
 ```
 
@@ -70,7 +70,7 @@ When syncing to a Google Secret Manager Secret, the following flags are supporte
 ## --type=secret-manager ##
 ###########################
 # only accepts files, not folders
-./sync-to-gcp --path=./path/to/cert.pem --secret=private-key --project=a-gcp-project-1234
+./file-sync-to-gcp --path=./path/to/cert.pem --secret=private-key --project=a-gcp-project-1234
 ```
 
 ## Running In Docker
@@ -87,8 +87,8 @@ docker run \
   --volume $PWD:/mount \
   --detach \
   --env GOOGLE_APPLICATION_CREDENTIALS=/mount/account.json \
-  ghcr.io/ammilam/sync-to-gcp:latest \
-  "./sync-to-gcp --path=./mount/path/to/file.txt --bucket=a-gcs-bucket --interval=300"
+  ghcr.io/ammilam/file-sync-to-gcp:latest \
+  "./file-sync-to-gcp --path=./mount/path/to/file.txt --bucket=a-gcs-bucket --interval=300"
 ```
 
 ## Helm
@@ -100,7 +100,7 @@ In order to get started deploying this solution via helm, you will need to provi
 ```yaml
 # command to run at startup
 command: |-
-  ./sync-to-gcp --path=./data/test.txt --bucket=test-bucket-1234
+  ./file-sync-to-gcp --path=./data/test.txt --bucket=test-bucket-1234
   
 # mount a nfs to the pod
 nfs:
@@ -135,8 +135,8 @@ Once values.yaml has been configured, install the chart.
 helm repo add ammilam https://ammilam.github.io/helm-charts/
 
 # install the helm chart using the values.yaml file
-helm upgrade --install sync-to-gcp ammilam/sync-to-gcp -f values.yaml
+helm upgrade --install file-sync-to-gcp ammilam/file-sync-to-gcp -f values.yaml
 ```
 
-- Helm Chart Source: https://github.com/ammilam/helm-charts/sync-to-gcp
+- Helm Chart Source: https://github.com/ammilam/helm-charts/file-sync-to-gcp
 - Helm Chart Repo: https://ammilam.github.io/helm-charts/

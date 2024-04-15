@@ -43,7 +43,7 @@ jobs:
       uses: svenstaro/upload-release-action@2.8.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sync-to-gcp*
+        file: file-sync-to-gcp*
         tag: ${{ steps.tag_version.outputs.new_tag }}
         overwrite: true
         file_glob: true
